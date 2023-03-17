@@ -19,7 +19,8 @@
 		           &free, &free, &free) != 3)
 			return NULL;
 
-		return fmt_human(free * 1024, 1024);
+		//return fmt_human(free * 1024, 1024);
+		return fmt_human(free * 1000, 1000);
 	}
 
 	const char *
@@ -53,7 +54,8 @@
 		    != 1)
 			return NULL;
 
-		return fmt_human(total * 1024, 1024);
+		//return fmt_human(total * 1024, 1024);
+		return fmt_human(total * 1000, 1000);
 	}
 
 	const char *
@@ -71,7 +73,8 @@
 			return NULL;
 
 		used = (total - free - buffers - cached);
-		return fmt_human(used * 1024, 1024);
+		//return fmt_human(used * 1024, 1024);
+		return fmt_human(used * 1000, 1000);
 	}
 #elif defined(__OpenBSD__)
 	#include <stdlib.h>
