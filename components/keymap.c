@@ -75,7 +75,18 @@ keymap(const char *unused)
 		warn("XGetAtomName: Failed to get atom name");
 		goto end;
 	}
-	layout = bprintf("%s", get_layout(symbols, state.group));
+	{
+		char *raw_layout = get_layout(symbols, state.group);
+		if (!raw_layout) {
+			layout = bprintf("us");
+		} else if (strstr(raw_layout, "colemak_dh")) {
+			layout = bprintf("DH");
+		} else if (strcmp(raw_layout, "us") == 0) {
+			layout = bprintf("QW");
+		} else {
+			layout = bprintf("%s", raw_layout);
+		}
+	}
 	XFree(symbols);
 end:
 	XkbFreeKeyboard(desc, XkbSymbolsNameMask, 1);
